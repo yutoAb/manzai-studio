@@ -1,0 +1,12 @@
+{
+  "boke": {
+    "pos_x": 603,
+    "char_h": 1050,
+    "floor_y": 1080
+  },
+  "tsukkomi": {
+    "pos_x": 1310,
+    "char_h": 927,
+    "floor_y": 1080
+  }
+}

@@ -3,11 +3,11 @@
   "speakers": {
     "boke": {
       "name": "ボケ",
-      "voice_id": "REPLACE_WITH_BOKE_VOICE_ID"
+      "voice_id": "yRumkNHl04G3mrnOTMrT"
     },
     "tsukkomi": {
       "name": "ツッコミ",
-      "voice_id": "REPLACE_WITH_TSUKKOMI_VOICE_ID"
+      "voice_id": "Mv8AjrYZCBkdsmDHNwcB"
     }
   },
   "lines": [

@@ -1,0 +1,14 @@
+[project]
+name = "manzai-studio"
+version = "0.1.0"
+description = "漫才台本から M-1 風の映像付きネタ動画を作るパイプライン"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32",
+    "python-dotenv>=1.0",
+    "numpy>=2.0",
+    "pillow>=11.0",
+    "rembg>=2.0.76",
+    "onnxruntime>=1.26.0",
+    "opencv-python-headless>=4.13.0.92",
+]
