@@ -1,0 +1,37 @@
+{
+  "title": "マンジャロ",
+  "speakers": {
+    "boke": {
+      "name": "ボケ",
+      "voice_id": "REPLACE_WITH_BOKE_VOICE_ID"
+    },
+    "tsukkomi": {
+      "name": "ツッコミ",
+      "voice_id": "REPLACE_WITH_TSUKKOMI_VOICE_ID"
+    }
+  },
+  "lines": [
+    { "speaker": "tsukkomi", "text": "どうもー、よろしくお願いしますー。", "gap_ms": 0 },
+    { "speaker": "boke", "text": "いきなりやけどな、うちのオカンがな、最近ハマってるもんがあるらしいねんけど、名前をちょっと忘れたらしくてな。", "gap_ms": 400 },
+    { "speaker": "tsukkomi", "text": "名前忘れてもうて、どうなってんねんそれ。ほな一緒に考えてあげるから、どんな特徴か教えてみてよ。", "gap_ms": 150 },
+    { "speaker": "boke", "text": "オカンが言うには、週に一回打つだけで、食欲がスーッとなくなって痩せるらしいねん。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "マンジャロやないかい。週一回の注射で食欲が落ちるっちゅうのはGLP-1のお薬、マンジャロで決まりよ、すぐ分かったやんこんなもん。", "gap_ms": 100 },
+    { "speaker": "boke", "text": "俺もマンジャロやと思てんけどな、オカンが言うには、頂上に万年雪が積もってるらしいねん。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "ほなマンジャロちゃうやないかい。注射に万年雪積もってたら誰も打たれへんのよ。それはキリマンジャロ、アフリカ最高峰や。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "そうやんな。ほんでオカンが言うには、登るのに五日くらいかかるらしいねん。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "キリマンジャロやないかい。ほな山で決まりや。", "gap_ms": 100 },
+    { "speaker": "boke", "text": "でもな、オカンが言うには、それ、パソコンに入れるもんらしいねん。", "gap_ms": 400 },
+    { "speaker": "tsukkomi", "text": "ほなキリマンジャロちゃうやないかい。アフリカ最高峰がパソコンに入るかいな。何ギガバイトあると思てんねん。", "gap_ms": -100 },
+    { "speaker": "boke", "text": "オカンが言うには、アーチ系で、ローリングリリースらしいねん。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "Manjaro Linuxやないかい。Arch系で初心者にも優しいディストリビューション、Manjaroで決まりよ。オカン、ターミナル開いてんのかいな。", "gap_ms": 150 },
+    { "speaker": "boke", "text": "俺もManjaroやと思てんけどな、オカンが言うには、打った次の日、ちょっと吐き気がするらしいねん。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "ほなLinuxちゃうやないかい。OSインストールして吐き気したら再起動より先に病院やのよ。それは薬の方のマンジャロや。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "せやけどオカンが言うには、起動画面がかっこいいらしいねん。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "どっちやねん。注射、山、OSの三択で毎回ハズレ引いてくる才能なんやねんそれ。", "gap_ms": 100 },
+    { "speaker": "boke", "text": "ほんでオトンが言うにはな。", "gap_ms": 500 },
+    { "speaker": "tsukkomi", "text": "オトン?", "gap_ms": 100 },
+    { "speaker": "boke", "text": "セマグルチドちゃうか、って。", "gap_ms": 400 },
+    { "speaker": "tsukkomi", "text": "いや絶対ちゃうやろ。それ成分名で隣の薬や。チルゼパチドやないかい、もうええわ。", "gap_ms": -100 },
+    { "speaker": "tsukkomi", "text": "どうもありがとうございましたー。", "gap_ms": 200 }
+  ]
+}
