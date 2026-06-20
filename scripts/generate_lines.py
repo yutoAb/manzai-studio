@@ -28,16 +28,36 @@ DEFAULT_VOICE_SETTINGS = {
 }
 
 
+import re
+
+# <リップ音> <叩く> のような非言語キューは TTS せず効果音として別途差し込む
+CUE_RE = re.compile(r"^\s*[<＜].*[>＞]\s*$")
+
+
+def is_cue(text: str) -> bool:
+    return bool(CUE_RE.match(text or ""))
+
+
 def synthesize(api_key: str, voice_id: str, text: str, out_path: Path,
-               voice_settings: dict | None = None) -> None:
+               voice_settings: dict | None = None,
+               previous_text: str | None = None,
+               next_text: str | None = None) -> None:
+    # 掛け合いの自然さ向上: 前後のセリフを文脈として渡し、抑揚を会話として繋ぐ
+    payload = {
+        "text": text,
+        "model_id": MODEL_ID,
+        "voice_settings": {**DEFAULT_VOICE_SETTINGS, **(voice_settings or {})},
+    }
+    # previous_text/next_text は eleven_v3 では未対応（400）。v3以外でのみ付与。
+    if MODEL_ID != "eleven_v3":
+        if previous_text:
+            payload["previous_text"] = previous_text
+        if next_text:
+            payload["next_text"] = next_text
     resp = requests.post(
         API_URL.format(voice_id=voice_id),
         headers={"xi-api-key": api_key},
-        json={
-            "text": text,
-            "model_id": MODEL_ID,
-            "voice_settings": {**DEFAULT_VOICE_SETTINGS, **(voice_settings or {})},
-        },
+        json=payload,
         timeout=120,
     )
     resp.raise_for_status()
@@ -54,18 +74,31 @@ def main() -> None:
     script = json.loads(script_path.read_text())
     LINES_DIR.mkdir(parents=True, exist_ok=True)
 
-    for i, line in enumerate(script["lines"]):
-        speaker = script["speakers"][line["speaker"]]
+    lines = script["lines"]
+
+    def ctx(idx: int) -> str | None:
+        """前後の文脈テキスト（非言語キューは除外）。"""
+        if 0 <= idx < len(lines) and not is_cue(lines[idx]["text"]):
+            return lines[idx]["text"]
+        return None
+
+    for i, line in enumerate(lines):
         out_path = LINES_DIR / f"{i:03d}_{line['speaker']}.mp3"
+        if is_cue(line["text"]):
+            # 効果音キュー（<...>）は TTS しない（別途 SFX を差し込む）
+            print(f"cue   {out_path.name}  {line['text']}  → SFXで差し込み")
+            continue
         if out_path.exists():
             print(f"skip  {out_path.name}")
             continue
+        speaker = script["speakers"][line["speaker"]]
         if speaker["voice_id"].startswith("REPLACE"):
             sys.exit(f"speakers.{line['speaker']}.voice_id を台本 JSON に設定してください")
         print(f"tts   {out_path.name}  {line['text'][:30]}…")
         # 話者既定 + その行の上書き（line.voice_settings）をマージ
         vs = {**speaker.get("voice_settings", {}), **line.get("voice_settings", {})}
-        synthesize(api_key, speaker["voice_id"], line["text"], out_path, vs)
+        synthesize(api_key, speaker["voice_id"], line["text"], out_path, vs,
+                   previous_text=ctx(i - 1), next_text=ctx(i + 1))
 
     print(f"done: {LINES_DIR}")
 

@@ -43,6 +43,12 @@ uv run python scripts/assemble_audio.py assets/scripts/<name>.json   # manzai.wa
 - `stem_boke.wav` / `stem_tsukkomi.wav` … 話者別ステム（**動画生成の駆動音声**）
 - `timeline.json` … 各セリフの開始/終了
 
+台本の追加仕様:
+- **かぶせ（負 `gap_ms`）はダッキングされる**: `assemble_audio.py` の `DUCK`（0.5≈−6dB）で、被せられる側の語尾を潜らせ割り込みを明瞭に。
+- **`<...>` は効果音キュー**: `generate_lines.py` はTTSせずスキップ。別途 `sound-generation` 等で同名mp3を当ててから assemble する（例: `<叩く>` `<リップ音>`）。
+- **感情アーク**: 各行 `voice_settings` を位置でランプ（後半ほど `stability`↓/`style`↑）すると、通しての盛り上がりが少し付く。
+- ⚠ **`previous_text`/`next_text`（文脈条件付け）は eleven_v3 では未対応**（400）。`generate_lines.py` は v3 以外でのみ付与する。文脈条件付けより v3 の抑揚の方が自然だったため、現状は v3 を既定にしている。
+
 > **ffmpeg が古い場合**: imageio-ffmpeg の同梱版（7.0.2）を使う。
 > ```sh
 > uv run python -c "import imageio_ffmpeg,os,subprocess;print(imageio_ffmpeg.get_ffmpeg_exe())"
@@ -179,4 +185,6 @@ ffmpeg -i outputs/video_continue_N.mp4 -i output/audio/manzai.wav \
 | assemble が ffmpeg で失敗 | 旧ffmpeg → **imageio-ffmpeg(7.0.2)** |
 | `while read` ループ中に行が壊れる | ループ内 ffmpeg に **`-nostdin`** |
 | v3タグ(`[curious]`等)が読み上げられる | タグを外し `voice_settings`＋句読点で表現 |
+| `previous_text/next_text` で 400 | v3は文脈条件付け**非対応** → v3以外で使う（`generate_lines.py`はv3では付与しない） |
+| `<...>`の行が0バイト/誤読される | 非言語キューはTTS不可 → 効果音キュー扱いでスキップし、別途 `sound-generation` で当てる |
 | VS Codeで動画が `Failed to load` | `-movflags +faststart` 化、もしくはブラウザ/ローカル再生 |

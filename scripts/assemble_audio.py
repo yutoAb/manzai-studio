@@ -27,14 +27,24 @@ def duration_ms(path: Path) -> int:
     return round(float(out) * 1000)
 
 
+# 被せ区間で「被せられる側」を潜らせる量（0=据置, 0.5≈-6dB）。割り込みを明瞭に。
+DUCK = 0.5
+
+
 def mix(entries: list[dict], out_path: Path, total_ms: int) -> None:
-    """adelay で各セリフを開始時刻に置き、amix で重ねる（かぶせ対応）。"""
+    """adelay で各セリフを開始時刻に置き、amix で重ねる（かぶせ対応）。
+    次のセリフが食い込む区間は、被せられる側の語尾をダッキングして自然にする。"""
     cmd = ["ffmpeg", "-y"]
     filters = []
     for i, e in enumerate(entries):
         cmd += ["-i", str(e["file"])]
         # mono 音声なので all=1 は不要（古い ffmpeg は all 未対応のため付けない）
-        filters.append(f"[{i}:a]adelay={e['start_ms']}[a{i}]")
+        chain = f"[{i}:a]adelay={e['start_ms']}"
+        nxt = entries[i + 1] if i + 1 < len(entries) else None
+        if nxt and nxt["start_ms"] < e["end_ms"]:  # 次が食い込む＝被せられる
+            ov_s, end_s = nxt["start_ms"] / 1000, e["end_ms"] / 1000
+            chain += f",volume=enable='between(t,{ov_s:.3f},{end_s:.3f})':volume={DUCK}"
+        filters.append(chain + f"[a{i}]")
     inputs = "".join(f"[a{i}]" for i in range(len(entries)))
     filters.append(
         f"{inputs}amix=inputs={len(entries)}:normalize=0,"

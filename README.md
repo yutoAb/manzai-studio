@@ -78,12 +78,19 @@ uv run python scripts/extract_sprites.py
   "lines": [
     // gap_ms: 直前のセリフ終わりからの間。負値で「かぶせ」（食い気味ツッコミ）
     { "speaker": "tsukkomi", "text": "どうもー", "gap_ms": 0 },
-    { "speaker": "boke", "text": "[laughs] いきなりやけどな", "gap_ms": 250 }
+    { "speaker": "boke", "text": "いきなりやけどな", "gap_ms": 250 },
+    // <...> は非言語の効果音キュー。TTSせず別途SFXを差し込む（例: <叩く> <リップ音>）
+    { "speaker": "tsukkomi", "text": "<叩く>", "gap_ms": -100 }
   ]
 }
 ```
 
-- `[laughs]` `[sighs]` などの ElevenLabs v3 オーディオタグがそのまま使える
+- 各行・各話者に `voice_settings`（`stability` / `style` 等）を持たせて上書き可。
+  後半ほど `stability`↓ / `style`↑ にランプさせると、エスカレーションが少し付く
+- **かぶせ（負 `gap_ms`）の区間は、被せられる側を自動でダッキング**（`assemble_audio.py` の `DUCK`）
+- `<...>` の行は効果音キュー扱い（`generate_lines.py` はTTSせずスキップ。別途 `sound-generation` 等で当てる）
+- ⚠ ElevenLabs v3 は `[laughs]` 等の角括弧タグを**読み上げてしまう**ことがある。
+  抑揚は角括弧タグでなく `voice_settings`＋句読点・「…」で表現する
 - 漫才のテンポの目安: ボケ→ツッコミは 100–250ms、強いツッコミは -150ms 前後のかぶせ、
   天丼や転換の前は 600ms 以上空ける
 
