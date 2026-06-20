@@ -33,7 +33,8 @@ def mix(entries: list[dict], out_path: Path, total_ms: int) -> None:
     filters = []
     for i, e in enumerate(entries):
         cmd += ["-i", str(e["file"])]
-        filters.append(f"[{i}:a]adelay={e['start_ms']}:all=1[a{i}]")
+        # mono 音声なので all=1 は不要（古い ffmpeg は all 未対応のため付けない）
+        filters.append(f"[{i}:a]adelay={e['start_ms']}[a{i}]")
     inputs = "".join(f"[a{i}]" for i in range(len(entries)))
     filters.append(
         f"{inputs}amix=inputs={len(entries)}:normalize=0,"

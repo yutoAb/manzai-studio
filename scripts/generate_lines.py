@@ -18,14 +18,25 @@ ROOT = Path(__file__).resolve().parent.parent
 LINES_DIR = ROOT / "output" / "lines"
 
 
-def synthesize(api_key: str, voice_id: str, text: str, out_path: Path) -> None:
+# 漫才向けの既定: stability を下げて抑揚を出し、style を上げて演技を強める。
+# 話者ごとに台本 JSON の speakers.<spk>.voice_settings で上書きできる。
+DEFAULT_VOICE_SETTINGS = {
+    "stability": 0.3,
+    "similarity_boost": 0.8,
+    "style": 0.5,
+    "use_speaker_boost": True,
+}
+
+
+def synthesize(api_key: str, voice_id: str, text: str, out_path: Path,
+               voice_settings: dict | None = None) -> None:
     resp = requests.post(
         API_URL.format(voice_id=voice_id),
         headers={"xi-api-key": api_key},
         json={
             "text": text,
             "model_id": MODEL_ID,
-            "voice_settings": {"stability": 0.4, "similarity_boost": 0.8},
+            "voice_settings": {**DEFAULT_VOICE_SETTINGS, **(voice_settings or {})},
         },
         timeout=120,
     )
@@ -52,7 +63,9 @@ def main() -> None:
         if speaker["voice_id"].startswith("REPLACE"):
             sys.exit(f"speakers.{line['speaker']}.voice_id を台本 JSON に設定してください")
         print(f"tts   {out_path.name}  {line['text'][:30]}…")
-        synthesize(api_key, speaker["voice_id"], line["text"], out_path)
+        # 話者既定 + その行の上書き（line.voice_settings）をマージ
+        vs = {**speaker.get("voice_settings", {}), **line.get("voice_settings", {})}
+        synthesize(api_key, speaker["voice_id"], line["text"], out_path, vs)
 
     print(f"done: {LINES_DIR}")
 

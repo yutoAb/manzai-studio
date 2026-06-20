@@ -1,0 +1,75 @@
+{
+  "title": "パイソン（漫才デリバリー版・明るめボイス）",
+  "speakers": {
+    "boke": {
+      "name": "ボケ",
+      "voice_id": "J0lF1jpZbjGUH7LlGQfH",
+      "voice_settings": {
+        "stability": 0.4,
+        "similarity_boost": 0.9,
+        "style": 0.45
+      }
+    },
+    "tsukkomi": {
+      "name": "ツッコミ",
+      "voice_id": "tBfOvWrqvlfBiyUGpSAS",
+      "voice_settings": {
+        "stability": 0.2,
+        "similarity_boost": 0.9,
+        "style": 0.6
+      }
+    }
+  },
+  "lines": [
+    {
+      "speaker": "tsukkomi",
+      "text": "どうもー、よろしくお願いしますー！",
+      "gap_ms": 0
+    },
+    {
+      "speaker": "boke",
+      "text": "いきなりやけどな、うちのオカンがな、最近好きになったもんがあるらしいねんけど…名前をちょっと、忘れたらしくてな。",
+      "gap_ms": 250
+    },
+    {
+      "speaker": "tsukkomi",
+      "text": "また名前忘れてもうたんかいな。ほな一緒に考えてあげるから、どんな特徴か教えてみてよ。",
+      "gap_ms": -200
+    },
+    {
+      "speaker": "boke",
+      "text": "オカンが言うにはな…獲物に巻きついて、ギューッと締め上げてくるらしいねん。",
+      "gap_ms": 150
+    },
+    {
+      "speaker": "tsukkomi",
+      "text": "ニシキヘビやないかい！獲物に巻きついて締め上げるっちゅうのは大型のヘビ、ニシキヘビで決まりよ。すぐ分かったやんこんなもん。",
+      "gap_ms": -500
+    },
+    {
+      "speaker": "boke",
+      "text": "俺もニシキヘビやと思てんけどな…オカンが言うには、インデント揃えへんとエラーで動かへんらしいねん。",
+      "gap_ms": 150
+    },
+    {
+      "speaker": "tsukkomi",
+      "text": "ほなニシキヘビちゃうやないかい！ヘビがインデントなんか気にするかいな。それプログラミング言語のパイソンや。",
+      "gap_ms": -500
+    },
+    {
+      "speaker": "boke",
+      "text": "俺もパイソンやと思てんけどな…オカンが言うには、空飛ぶサーカスやるらしいねん。",
+      "gap_ms": 150
+    },
+    {
+      "speaker": "tsukkomi",
+      "text": "ほなパイソンでもないやないかい！プログラミング言語が空飛んでサーカスせえへんのよ。それはモンティ・パイソン、イギリスの伝説のコメディや。もうええわ。",
+      "gap_ms": -550
+    },
+    {
+      "speaker": "tsukkomi",
+      "text": "どうもありがとうございましたー！",
+      "gap_ms": 200
+    }
+  ]
+}

@@ -114,7 +114,8 @@ done
 while IFS=$'\\t' read -r name dur; do
   raw="$PREFIX/raw_$name.mp4"
   fix="$PREFIX/fix_$name.mp4"
-  ffmpeg -y -v error -i "$raw" \\
+  # -nostdin 必須: 無いと ffmpeg が while-read の stdin(durations.tsv) を食って次行が壊れる
+  ffmpeg -nostdin -y -v error -i "$raw" \\
     -vf "tpad=stop_mode=clone:stop_duration=3,fps=$FPS" -t "$dur" \\
     -an "$fix"
   echo "file 'fix_$name.mp4'" >> "$PREFIX/concat.txt"
