@@ -14,6 +14,9 @@ uv sync
 cp .env.example .env   # ELEVENLABS_API_KEY を記入
 ```
 
+> 動画生成（MultiTalk / LongCat-Video-Avatar）まで含むフルセットアップ手順は
+> **[docs/SETUP.md](docs/SETUP.md)** を参照（Blackwell GPU 対応・既知のハマりどころ含む）。
+
 `assets/scripts/manjaro.json` の `voice_id` を自分の ElevenLabs ボイスに差し替える
 （[Voice Library](https://elevenlabs.io/app/voice-library) で日本語男性ボイスを2つ選ぶ。
 ツッコミは張りのある声、ボケは飄々とした声が合う）。
