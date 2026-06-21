@@ -6,4 +6,8 @@ __pycache__/
 
 groundtruth/
 
+# 著作権のある実ネタ台本（私的利用のみ・公開しない）。オリジナル台本は追跡する
+assets/scripts/kamaitachi_*.json
+assets/scripts/reiwaroman_*.json
+
 memo.md
