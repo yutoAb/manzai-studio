@@ -4,7 +4,8 @@
 
 ```
 台本 JSON ──> ① TTS (ElevenLabs v3) ──> ② 間・かぶせ調整 + 結合 ──> ③ 映像化
-              1セリフ = 1音声ファイル      完成音声 + タイムライン        カット割り / 2人立ち絵動画
+              1セリフ = 1音声ファイル      完成音声 + 話者別ステム      カット割り / 2人立ち絵 /
+                                          + タイムライン               音声駆動アバター(LongCat)
 ```
 
 ## セットアップ（uv）
@@ -94,12 +95,37 @@ uv run python scripts/extract_sprites.py
 - 漫才のテンポの目安: ボケ→ツッコミは 100–250ms、強いツッコミは -150ms 前後のかぶせ、
   天丼や転換の前は 600ms 以上空ける
 
-## ④ 本番映像（リップシンク）
+## ④ 本番映像（音声駆動アバター / リップシンク）
 
-プレビューの先、M-1 風の実写質感にする手順:
+現在の主力は **[LongCat-Video-Avatar-1.5](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5)**
+（MultiTalk 後継）の **multi-audio**（2話者同時）モード。2人ツーショットの参照画像と
+話者別ステムを渡すと、話者ごとにリップシンクした掛け合い動画を1本で生成できる。
 
-1. 漫才師風の立ち姿画像を2枚用意（画像生成 AI 可）→ `assets/images/boke.png` / `tsukkomi.png`
-2. [Hedra](https://www.hedra.com) / OmniHuman / Kling の lip-sync に
-   「キャラ画像 + `stem_<speaker>.wav`」を渡して話者ごとのリップシンク動画を生成
-3. `output/audio/timeline.json` の時刻でカットを切り替えて編集
-   （CapCut でもいいし、`make_cut_video.py` の concat リストを流用してもよい）
+```
+2人ツーショット参照画像 + person1=stem_boke.wav + person2=stem_tsukkomi.wav (audio_type=para)
+  └─> run_demo_avatar_multi_audio_to_video.py ─> video_continue_N.mp4（音声 mux 済み）
+```
+
+- 参照画像は実写素材から1フレーム抜く / 画像生成 AI で用意（白背景・上半身ツーショット推奨）。
+- 駆動音声は `assemble_audio.py` が出す `stem_<speaker>.wav` を 16kHz mono に変換して使う。
+- 長尺は `num_segments` を伸ばす（1セグメント ≈ 先頭3.7s + 以降3.2s/seg）。
+- セットアップ・実行コマンド・**共有マシンでの OOM 回避（bf16＋単一プロセス）**等のハマりどころは
+  **[docs/SETUP.md](docs/SETUP.md)** を参照。
+- 既知の弱点: 長時間生成での**顔の identity ドリフト**、左下のウォーターマーク幻影、
+  極端な同時発話下でのリップシンク不安定（→ [docs/research_fullduplex_manzai.md](docs/research_fullduplex_manzai.md)）。
+
+**代替（商用 API）**: [Hedra](https://www.hedra.com) / OmniHuman / Kling の lip-sync に
+「キャラ画像 + `stem_<speaker>.wav`」を渡して話者ごとに生成し、`timeline.json` の時刻で
+カットを切り替えて編集する方法もある。
+
+## ドキュメント / リサーチ
+
+| ファイル | 内容 |
+|---|---|
+| [docs/SETUP.md](docs/SETUP.md) | フルセットアップ（Blackwell GPU・LongCat/MultiTalk・既知のハマりどころ） |
+| [docs/research_fullduplex_manzai.md](docs/research_fullduplex_manzai.md) | フルデュプレックス漫才（重なり・大動作）の動画生成リサーチと到達点 |
+| [docs/RELATED_WORK.md](docs/RELATED_WORK.md) | 関連研究（talking-head / 対話音声 / ジェスチャー生成） |
+| [docs/MULTITALK.md](docs/MULTITALK.md) | MultiTalk 用の入力生成・実行メモ |
+
+実績の目安: 令和ロマン風ネタ ~108秒、かまいたち実ネタ ~285秒（全ネタ通し）を
+本パイプラインで生成済み（ターン型・重なり型いずれも一本完走を確認）。
