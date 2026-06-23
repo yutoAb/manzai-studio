@@ -127,5 +127,17 @@ uv run python scripts/extract_sprites.py
 | [docs/RELATED_WORK.md](docs/RELATED_WORK.md) | 関連研究（talking-head / 対話音声 / ジェスチャー生成） |
 | [docs/MULTITALK.md](docs/MULTITALK.md) | MultiTalk 用の入力生成・実行メモ |
 
-実績の目安: 令和ロマン風ネタ ~108秒、かまいたち実ネタ ~285秒（全ネタ通し）を
-本パイプラインで生成済み（ターン型・重なり型いずれも一本完走を確認）。
+実績の目安: オリジナル漫才ネタで ~100秒、実在の漫才ネタ（私的検証のみ・非公開）で
+~285秒の全ネタ通しを本パイプラインで生成済み（ターン型・重なり型いずれも一本完走を確認）。
+公開リポジトリに含めるのはオリジナル台本・クリーンな素材のみ。
+
+## ライセンスと利用上の注意
+
+- **コード**: [Apache License 2.0](LICENSE)。
+- **同梱素材**: オリジナル台本（`manjaro.json` 等）と人物を含まない背景・舞台画像のみ。
+- **依存する外部モデル/サービス**は各自の規約に従うこと
+  （[ElevenLabs](https://elevenlabs.io/terms) / [LongCat-Video-Avatar-1.5](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5) / Whisper 等）。
+- ⚠ **実写の漫才映像・実在人物の声まね（voice clone）・既存ネタの台本は私的利用の範囲に限る。**
+  立ち絵や舞台の切り出し、本人そっくりのボイス、第三者のネタ台本を含む生成物を公開すると
+  著作権・肖像権・パブリシティ権・声の権利に触れる。OSS として配布・公開するのは
+  自作台本＋自分（または許諾済み）のボイス＋人物を含まない素材で作った成果物に限ること。

@@ -10,5 +10,11 @@ groundtruth/
 assets/scripts/kamaitachi_*.json
 assets/scripts/reiwaroman_*.json
 
+# 実写映像から切り出した立ち絵（実在人物の肖像・公開しない）。
+# extract_sprites.py が生成する口パク用スプライト。クリーンな背景(stage/boke/tsukkomi.png)は追跡する
+assets/images/*_open.png
+assets/images/*_closed.png
+assets/images/*_blink.png
+
 memo.md
 *.log

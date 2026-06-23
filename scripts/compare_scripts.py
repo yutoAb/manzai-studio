@@ -3,8 +3,8 @@
 使い方:
   python scripts/compare_scripts.py <base.json> <edited.json>
   例) python scripts/compare_scripts.py \
-        assets/scripts/kamaitachi_usj_full.auto.json \
-        assets/scripts/kamaitachi_usj_full.json
+        assets/scripts/<neta>.auto.json \
+        assets/scripts/<neta>.json
 
 出力:
   ① 定量メトリクス（行数/文字数/フィラー/相槌/笑い/ミラーリング/かぶせ）の左右比較
