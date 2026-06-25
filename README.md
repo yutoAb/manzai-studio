@@ -8,6 +8,15 @@
                                           + タイムライン               音声駆動アバター(LongCat)
 ```
 
+## デモ
+
+![manzai-studio demo](assets/demo/demo.gif)
+
+自作ネタ「マンジャロ」を、**実在しない架空の2人（合成写真）** ＋ 音声駆動アバター
+（[LongCat-Video-Avatar-1.5](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5)）で
+生成した例（480p・132秒・話者別リップシンク）。台本・音声・参照画像はすべてオリジナル/合成で、
+実在人物の肖像・声・既存ネタは含みません。フル動画は [Releases](../../releases) を参照。
+
 ## セットアップ（uv）
 
 ```sh
