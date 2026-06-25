@@ -1,0 +1,33 @@
+{
+  "title": "コンビニ",
+  "speakers": {
+    "boke": { "name": "ボケ", "voice_id": "yRumkNHl04G3mrnOTMrT" },
+    "tsukkomi": { "name": "ツッコミ", "voice_id": "Mv8AjrYZCBkdsmDHNwcB" }
+  },
+  "lines": [
+    { "speaker": "tsukkomi", "text": "どうもー、よろしくお願いしますー。", "gap_ms": 0 },
+    { "speaker": "boke", "text": "いきなりやけどな、俺、将来コンビニやりたいねん。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "ええやんか、コンビニ。二十四時間みんなの味方やからな。どんな店にすんの?", "gap_ms": 150 },
+    { "speaker": "boke", "text": "まず、夜中の二時に開けて、朝四時に閉める。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "一番人おらん時間だけ開けんのかい。コンビニは二十四時間が売りやろ、なんで丑三つ時専門やねん。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "で、うちの店、レジは置かへん。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "どうやって会計すんねん。", "gap_ms": 100 },
+    { "speaker": "boke", "text": "お客さんの良心に任せる。", "gap_ms": 250 },
+    { "speaker": "tsukkomi", "text": "性善説で経営すなや。三日で潰れるわ、そんなコンビニ。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "大丈夫、商品はおにぎり一種類だけやから。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "品揃え壊滅しとるやないか。「コンビニエンス」どこ行ってん。", "gap_ms": -100 },
+    { "speaker": "boke", "text": "しかもそのおにぎり、具は入ってへん。", "gap_ms": 250 },
+    { "speaker": "tsukkomi", "text": "ただの塩むすびやないかい。コンビニ名乗る資格ないわ。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "店員は俺一人で、基本ずっと寝てる。", "gap_ms": 300 },
+    { "speaker": "tsukkomi", "text": "営業する気あんのか。いらっしゃいませも言わへんやんそれ。", "gap_ms": 120 },
+    { "speaker": "boke", "text": "でもな、店の名前はめっちゃかっこええで。「ファミマートローソンイレブン」。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "全部乗せかい。大手三社から同時に怒られるわ、その名前。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "で、軌道に乗ったら二号店は海の中に作る。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "誰が泳いで塩むすび買いに行くねん。びしょびしょやろ、商品も客も。", "gap_ms": -100 },
+    { "speaker": "boke", "text": "三号店はもう宇宙な。", "gap_ms": 250 },
+    { "speaker": "tsukkomi", "text": "スケールだけ一丁前なんよ。足元のおにぎり一個から立て直せや。", "gap_ms": -150 },
+    { "speaker": "boke", "text": "ほんで結局な、めんどいから家でおにぎり握って食べるのが一番ええわってなった。", "gap_ms": 350 },
+    { "speaker": "tsukkomi", "text": "ほな店要らんやないかい! さんざん語っといて自給自足かい! もうええわ。", "gap_ms": -150 },
+    { "speaker": "tsukkomi", "text": "どうもありがとうございましたー。", "gap_ms": 200 }
+  ]
+}

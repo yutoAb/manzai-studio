@@ -18,3 +18,6 @@ assets/images/*_blink.png
 
 memo.md
 *.log
+
+# Qiita 記事の下書き（投稿は別管理 ~/dev/qiita-articles）。repo には含めない
+qiita_draft.md

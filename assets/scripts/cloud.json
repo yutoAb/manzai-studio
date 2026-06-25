@@ -1,0 +1,27 @@
+{
+  "title": "クラウド",
+  "speakers": {
+    "boke": {
+      "name": "ボケ",
+      "voice_id": "J0lF1jpZbjGUH7LlGQfH",
+      "voice_settings": { "stability": 0.4, "similarity_boost": 0.9, "style": 0.45 }
+    },
+    "tsukkomi": {
+      "name": "ツッコミ",
+      "voice_id": "tBfOvWrqvlfBiyUGpSAS",
+      "voice_settings": { "stability": 0.2, "similarity_boost": 0.9, "style": 0.6 }
+    }
+  },
+  "lines": [
+    { "speaker": "tsukkomi", "text": "どうもー、よろしくお願いしますー！", "gap_ms": 0 },
+    { "speaker": "boke", "text": "いきなりやけどな、うちのオカンがな、最近好きになったもんがあるらしいねんけど、名前をちょっと忘れたらしくてな。", "gap_ms": 250 },
+    { "speaker": "tsukkomi", "text": "また名前忘れてもうたんかいな。ほな一緒に考えたるから、どんな特徴か言うてみてよ。", "gap_ms": -200 },
+    { "speaker": "boke", "text": "オカンが言うにはな、空にぷかぷか浮かんでて、雨が降る前はだいたい黒っぽくなるらしいねん。", "gap_ms": 150 },
+    { "speaker": "tsukkomi", "text": "雲やないかい！空に浮かんで雨降らすっちゅうのは気象の雲、くもで決まりよ。すぐ分かったやんこんなもん。", "gap_ms": -500 },
+    { "speaker": "boke", "text": "俺も雲やと思てんけどな、オカンが言うには、写真もデータも全部そこに預けて、どの端末からでも取り出せるらしいねん。", "gap_ms": 150 },
+    { "speaker": "tsukkomi", "text": "ほな雲ちゃうやないかい！空のくもにデータ預けられるかいな。スマホの容量パンパンでも安心、それクラウドストレージや。", "gap_ms": -500 },
+    { "speaker": "boke", "text": "俺もクラウドやと思てんけどな、オカンが言うには、でっかい剣を背負って、ソルジャーやっとったらしいねん。", "gap_ms": 150 },
+    { "speaker": "tsukkomi", "text": "ほなクラウドでもないやないかい！クラウドコンピューティングが大剣担いで戦わへんのよ。それはファイナルファンタジーのクラウドや。もうええわ。", "gap_ms": -550 },
+    { "speaker": "tsukkomi", "text": "どうもありがとうございましたー！", "gap_ms": 200 }
+  ]
+}
