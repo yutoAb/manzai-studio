@@ -308,6 +308,15 @@ def mix_audience(base: np.ndarray, timeline: list[dict]) -> np.ndarray:
     out = np.zeros(len(base) + tail, dtype=np.float32)
     out[: len(base)] = base
     last_end = len(base)
+
+    # 冒頭の登場拍手（出囃子代わり）。最初のセリフに被せて入れる。
+    opening = SFX_DIR / "applause_clap.mp3"
+    if opening.exists():
+        clap = load_mp3(opening) * 0.45
+        n = min(len(clap), len(out))
+        fade = np.linspace(1.0, 0.0, n, dtype=np.float32) ** 0.6  # 後半を緩やかに絞る
+        out[:n] += clap[:n] * fade
+        print("clap  applause_clap  @    0.0s  (opening)")
     for end_ms, name, head in cues:
         sfx = load_mp3(SFX_DIR / f"{name}.mp3") * LAUGH_GAIN[name]
         at = int((end_ms - 200) / 1000 * SR)
