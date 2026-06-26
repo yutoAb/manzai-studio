@@ -21,3 +21,6 @@ memo.md
 
 # Qiita 記事の下書き（投稿は別管理 ~/dev/qiita-articles）。repo には含めない
 qiita_draft.md
+
+# ルートに一時的に置く参照画像のドロップ先（正規版は assets/demo/ に移す）
+/image.png
