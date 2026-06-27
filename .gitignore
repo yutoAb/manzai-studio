@@ -27,3 +27,4 @@ qiita_draft.md
 launch_x_draft.md
 research_flowmatching_manzai.md
 *.timed.json
+scripts/diarize_*.py
