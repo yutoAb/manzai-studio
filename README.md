@@ -1,21 +1,23 @@
 # manzai-studio
 
-漫才台本から M-1 風の映像付きネタ動画を作るパイプライン。
+漫才台本から M-1 風の映像付きネタ動画を作るパイプライン。**お題を1語**入れるだけで、
+台本の自動生成から2話者同時リップシンク動画までを一気通貫で作れる。
 
 ```
-台本 JSON ──> ① TTS (ElevenLabs v3) ──> ② 間・かぶせ調整 + 結合 ──> ③ 映像化
-              1セリフ = 1音声ファイル      完成音声 + 話者別ステム      カット割り / 2人立ち絵 /
-                                          + タイムライン               音声駆動アバター(LongCat)
+お題 ─> ⓪ 台本生成(LLM) ─> ① TTS(ElevenLabs v3) ─> ② 間・かぶせ調整+結合 ─> ③ 映像化
+        台本 JSON          1セリフ=1音声ファイル      完成音声+話者別ステム      2話者同時リップシンク
+                                                     +タイムライン            (音声駆動アバター LongCat)
 ```
 
 ## デモ
 
 ![manzai-studio demo](assets/demo/demo.gif)
 
-自作ネタ「マンジャロ」を、**実在しない架空の2人（合成写真）** ＋ 音声駆動アバター
+お題「**クラウド**」から自動生成した漫才を、**実在しない架空の2人（合成写真）** ＋ 音声駆動アバター
 （[LongCat-Video-Avatar-1.5](https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.5)）で
-生成した例（480p・132秒・話者別リップシンク）。台本・音声・参照画像はすべてオリジナル/合成で、
-実在人物の肖像・声・既存ネタは含みません。フル動画は [Releases](../../releases) を参照。
+M-1風ステージに乗せた例（480p・話者別リップシンク・冒頭/締めの拍手入り）。台本・音声・参照画像は
+すべてオリジナル/合成で、実在人物の肖像・声・既存ネタは含みません。フル動画は
+[Releases](../../releases) を参照。
 
 ## セットアップ（uv）
 
@@ -34,6 +36,10 @@ cp .env.example .env   # ELEVENLABS_API_KEY を記入
 ## 使い方
 
 ```sh
+# ⓪ (任意) お題から漫才台本を自動生成（要 ANTHROPIC_API_KEY）。
+#    ミルクボーイ型(名前当て×二重三重の意味)で assets/scripts/<お題>.json を出力
+uv run python scripts/generate_script.py "クラウド"
+
 # ① セリフごとに TTS 音声を生成（生成済みはスキップされる）
 uv run python scripts/generate_lines.py assets/scripts/manjaro.json
 
