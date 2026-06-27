@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>manzai-studio — GroundTruth ↔ 生成物 比較</title>
+<title>manzai-studio — お題から作る漫才デモ</title>
 <style>
   :root { --bg:#0e1116; --card:#171c24; --line:#2a313c; --fg:#e6edf3; --mut:#9aa7b4; --accent:#f5c542; }
   * { box-sizing: border-box; }
@@ -14,16 +14,14 @@
   .sub { color:var(--mut); margin:0; }
   main { max-width:1100px; margin:0 auto; padding:8px 20px 64px; }
   .note { background:#13202b; border:1px solid #244055; border-radius:10px; padding:12px 16px; margin:18px 0; color:#bfe0f5; font-size:.92rem; }
+  .flow { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; margin:18px 0; color:var(--mut);
+          font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.84rem; overflow-x:auto; white-space:pre; }
   section { margin:34px 0; }
   h2 { font-size:1.25rem; border-left:4px solid var(--accent); padding-left:10px; margin:0 0 4px; }
   .desc { color:var(--mut); margin:0 0 14px; font-size:.95rem; }
   .row { display:flex; flex-wrap:wrap; gap:16px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; flex:1 1 320px; min-width:300px; }
-  .card.gt { border-color:#5a3a3a; }
-  .card.gen { border-color:#33513a; }
-  .tag { display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-bottom:8px; }
-  .tag.gt { background:#3a2222; color:#ff9d9d; }
-  .tag.gen { background:#1f3a28; color:#8ff0aa; }
+  .card { background:var(--card); border:1px solid #33513a; border-radius:12px; padding:12px; flex:1 1 320px; min-width:300px; }
+  .tag { display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.04em; padding:2px 8px; border-radius:999px; margin-bottom:8px; background:#1f3a28; color:#8ff0aa; }
   video { width:100%; border-radius:8px; background:#000; display:block; }
   .cap { margin:8px 2px 0; font-size:.85rem; color:var(--mut); }
   .cap b { color:var(--fg); font-weight:600; }
@@ -33,94 +31,47 @@
 </head>
 <body>
 <header>
-  <h1>manzai-studio — GroundTruth ↔ 生成物 比較</h1>
-  <p class="sub">実在の漫才（参照）と、本ツールが生成した漫才動画を並べて比較するページ。</p>
+  <h1>manzai-studio — お題から作る漫才デモ</h1>
+  <p class="sub">お題を1語入れるだけで、台本生成から2話者同時リップシンク動画までを一気通貫で作るパイプライン。</p>
 </header>
 <main>
+  <div class="flow">お題 ─> 台本生成(LLM) ─> 音声(ElevenLabs) ─> 間・かぶせ・ダッキング ─> 2話者同時リップシンク(LongCat-Video-Avatar)</div>
   <div class="note">
-    <b>GroundTruth</b>＝比較参照用の実演クリップ。<b>生成</b>＝本ツール出力（台本・音声・参照画像すべてオリジナル/合成）。
-    ツールの仕組み・コードは <a href="https://github.com/yutoAb/manzai-studio">github.com/yutoAb/manzai-studio</a>（Apache-2.0）。
+    ここで公開しているデモは<b>台本・音声・参照画像すべてオリジナル/合成</b>。実在人物の肖像・声・既存ネタは含みません。
+    コード（Apache-2.0）は <a href="https://github.com/yutoAb/manzai-studio">github.com/yutoAb/manzai-studio</a>。
   </div>
 
-  <!-- ① ミルクボーイ型フォーマット -->
   <section>
-    <h2>① ミルクボーイ型（名前当て × 二重三重の意味）</h2>
-    <p class="desc">「オカンが名前を忘れたもの当て」フォーマットを、本ツールがオリジナルのお題で再現できるかの比較。</p>
+    <h2>① お題「クラウド」</h2>
+    <p class="desc">雲 → クラウドストレージ → FF7 の三段ボケ（ミルクボーイ型・完全オリジナル）。同じネタを2つの参照画像で生成。</p>
     <div class="row">
-      <div class="card gt">
-        <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="media/gt_milkboy.mp4"></video>
-        <p class="cap"><b>ミルクボーイ</b> — 参照フォーマット元・約142秒</p>
-      </div>
-      <div class="card gen">
-        <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="media/gen_python.mp4"></video>
-        <p class="cap"><b>お題「パイソン」</b> — 自作・ニシキヘビ／Python／モンティパイソンの三段・約69秒</p>
-      </div>
-      <div class="card gen">
-        <span class="tag gen">生成</span>
+      <div class="card">
+        <span class="tag">生成</span>
         <video controls preload="metadata" src="media/gen_cloud_stage.mp4"></video>
-        <p class="cap"><b>お題「クラウド」</b> — 自作・雲／クラウド保存／FF7の三段・M-1風舞台・約70秒</p>
+        <p class="cap"><b>M-1風ステージ</b> — 冒頭/締めの拍手・会釈つき・約70秒</p>
       </div>
-    </div>
-  </section>
-
-  <!-- ② かまいたち（同一台本で GT vs 生成） -->
-  <section>
-    <h2>② かまいたち（同一ネタ：実演 vs 生成）</h2>
-    <p class="desc">同じネタ台本を、実演（GroundTruth）と本ツール生成（合成音声＋音声駆動アバター）で通し比較。</p>
-    <div class="row">
-      <div class="card gt">
-        <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="media/gt_kamaitachi.mp4"></video>
-        <p class="cap"><b>かまいたち（実演）</b> — 約276秒</p>
-      </div>
-      <div class="card gen">
-        <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="media/gen_kamaitachi.mp4"></video>
-        <p class="cap"><b>同ネタ 生成（フル通し）</b> — 89セグメント連続生成・約285秒</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ③ 令和ロマン -->
-  <section>
-    <h2>③ 令和ロマン（実演 vs 生成）</h2>
-    <p class="desc">ターン型の掛け合いの比較。</p>
-    <div class="row">
-      <div class="card gt">
-        <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="media/gt_reiwaroman.mp4"></video>
-        <p class="cap"><b>令和ロマン（実演）</b> — 参照</p>
-      </div>
-      <div class="card gen">
-        <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="media/gen_reiwaroman.mp4"></video>
-        <p class="cap"><b>生成</b> — 約108秒</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ④ 生成バリエーション -->
-  <section>
-    <h2>④ 生成のバリエーション（参照画像・背景）</h2>
-    <p class="desc">同じネタ（お題「クラウド」）を、異なる参照画像・背景で生成した例（すべて自作・公開可）。</p>
-    <div class="row">
-      <div class="card gen">
-        <span class="tag gen">生成</span>
+      <div class="card">
+        <span class="tag">生成</span>
         <video controls preload="metadata" src="media/gen_cloud_white.mp4"></video>
-        <p class="cap"><b>白背景スタジオ</b> — 上半身・リップシンク精度重視</p>
+        <p class="cap"><b>白背景スタジオ</b> — 上半身・リップシンク精度重視・約71秒</p>
       </div>
-      <div class="card gen">
-        <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="media/gen_cloud_stage.mp4"></video>
-        <p class="cap"><b>M-1風ステージ</b> — 舞台感・冒頭/締めの拍手・会釈</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>② お題「パイソン」</h2>
+    <p class="desc">ニシキヘビ → Python言語 → モンティ・パイソン の三段ボケ（完全オリジナル）。</p>
+    <div class="row">
+      <div class="card">
+        <span class="tag">生成</span>
+        <video controls preload="metadata" src="media/gen_python.mp4"></video>
+        <p class="cap"><b>お題「パイソン」</b> — 約69秒</p>
       </div>
     </div>
   </section>
 </main>
 <footer>
-  manzai-studio · GroundTruth ↔ 生成物 比較。生成物は台本・音声・参照画像すべてオリジナル/合成。
+  manzai-studio · お題→漫才動画のデモ集。生成物は台本・音声・参照画像すべてオリジナル/合成。
   <br>リポジトリ: <a href="https://github.com/yutoAb/manzai-studio">github.com/yutoAb/manzai-studio</a>
 </footer>
 </body>
