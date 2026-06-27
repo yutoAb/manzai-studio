@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <title>manzai-studio — GroundTruth ↔ 生成物 比較</title>
 <style>
   :root { --bg:#0e1116; --card:#171c24; --line:#2a313c; --fg:#e6edf3; --mut:#9aa7b4; --accent:#f5c542; }
@@ -14,8 +13,7 @@
   h1 { margin:0 0 6px; font-size:1.7rem; }
   .sub { color:var(--mut); margin:0; }
   main { max-width:1100px; margin:0 auto; padding:8px 20px 64px; }
-  .note { background:#2a1f12; border:1px solid #5a4220; border-radius:10px; padding:12px 16px; margin:18px 0; color:#ffd99a; font-size:.92rem; }
-  .note b { color:#ffcf7a; }
+  .note { background:#13202b; border:1px solid #244055; border-radius:10px; padding:12px 16px; margin:18px 0; color:#bfe0f5; font-size:.92rem; }
   section { margin:34px 0; }
   h2 { font-size:1.25rem; border-left:4px solid var(--accent); padding-left:10px; margin:0 0 4px; }
   .desc { color:var(--mut); margin:0 0 14px; font-size:.95rem; }
@@ -29,7 +27,6 @@
   video { width:100%; border-radius:8px; background:#000; display:block; }
   .cap { margin:8px 2px 0; font-size:.85rem; color:var(--mut); }
   .cap b { color:var(--fg); font-weight:600; }
-  .missing { padding:40px 12px; text-align:center; color:var(--mut); font-size:.85rem; border:1px dashed var(--line); border-radius:8px; }
   footer { max-width:1100px; margin:0 auto; padding:24px 20px 48px; color:var(--mut); font-size:.85rem; border-top:1px solid var(--line); }
   a { color:var(--accent); }
 </style>
@@ -37,14 +34,12 @@
 <body>
 <header>
   <h1>manzai-studio — GroundTruth ↔ 生成物 比較</h1>
-  <p class="sub">実在の漫才（参照）と、本ツールが生成した漫才動画を並べて比較する研究用ページ。</p>
+  <p class="sub">実在の漫才（参照）と、本ツールが生成した漫才動画を並べて比較するページ。</p>
 </header>
 <main>
   <div class="note">
-    ⚠ <b>非公開・私的検証用。</b>GroundTruth（実在芸人のネタ）は著作権物につき <b>git に含めず</b>、ローカル閲覧のみ。
-    GitHub Pages は private リポでも公開URLになるため、<b>実ネタを載せたまま Pages を有効化しないこと</b>
-    （ローカルで <code>python3 -m http.server</code> → <code>localhost:8000/docs/</code> で閲覧）。
-    公開する場合は生成物のみを残す。
+    <b>GroundTruth</b>＝比較参照用の実演クリップ。<b>生成</b>＝本ツール出力（台本・音声・参照画像すべてオリジナル/合成）。
+    ツールの仕組み・コードは <a href="https://github.com/yutoAb/manzai-studio">github.com/yutoAb/manzai-studio</a>（Apache-2.0）。
   </div>
 
   <!-- ① ミルクボーイ型フォーマット -->
@@ -54,17 +49,17 @@
     <div class="row">
       <div class="card gt">
         <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="../assets/groundtruth/milkboy/videoplayback.mp4"></video>
-        <p class="cap"><b>ミルクボーイ（実ネタ）</b> — 参照フォーマット元・約142秒</p>
+        <video controls preload="metadata" src="media/gt_milkboy.mp4"></video>
+        <p class="cap"><b>ミルクボーイ</b> — 参照フォーマット元・約142秒</p>
       </div>
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/longcat_manzai_v9.mp4"></video>
+        <video controls preload="metadata" src="media/gen_python.mp4"></video>
         <p class="cap"><b>お題「パイソン」</b> — 自作・ニシキヘビ／Python／モンティパイソンの三段・約69秒</p>
       </div>
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/video/manzai_cloud_stage_bow_480p.mp4"></video>
+        <video controls preload="metadata" src="media/gen_cloud_stage.mp4"></video>
         <p class="cap"><b>お題「クラウド」</b> — 自作・雲／クラウド保存／FF7の三段・M-1風舞台・約70秒</p>
       </div>
     </div>
@@ -77,12 +72,12 @@
     <div class="row">
       <div class="card gt">
         <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="../assets/groundtruth/kamaitachi/neta.mp4"></video>
+        <video controls preload="metadata" src="media/gt_kamaitachi.mp4"></video>
         <p class="cap"><b>かまいたち（実演）</b> — 約276秒</p>
       </div>
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/kama_full_final.mp4"></video>
+        <video controls preload="metadata" src="media/gen_kamaitachi.mp4"></video>
         <p class="cap"><b>同ネタ 生成（フル通し）</b> — 89セグメント連続生成・約285秒</p>
       </div>
     </div>
@@ -95,37 +90,37 @@
     <div class="row">
       <div class="card gt">
         <span class="tag gt">GroundTruth</span>
-        <video controls preload="metadata" src="../assets/groundtruth/reiwaroman/videoplayback%20(3).mp4"></video>
+        <video controls preload="metadata" src="media/gt_reiwaroman.mp4"></video>
         <p class="cap"><b>令和ロマン（実演）</b> — 参照</p>
       </div>
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/video_reiwaroman/reiwaroman_final.mp4"></video>
+        <video controls preload="metadata" src="media/gen_reiwaroman.mp4"></video>
         <p class="cap"><b>生成</b> — 約108秒</p>
       </div>
     </div>
   </section>
 
-  <!-- ④ 画質バリエーション（生成のみ） -->
+  <!-- ④ 生成バリエーション -->
   <section>
-    <h2>④ 生成のバリエーション（参照画像・画質）</h2>
+    <h2>④ 生成のバリエーション（参照画像・背景）</h2>
     <p class="desc">同じネタ（お題「クラウド」）を、異なる参照画像・背景で生成した例（すべて自作・公開可）。</p>
     <div class="row">
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/video/manzai_cloud_480p.mp4"></video>
+        <video controls preload="metadata" src="media/gen_cloud_white.mp4"></video>
         <p class="cap"><b>白背景スタジオ</b> — 上半身・リップシンク精度重視</p>
       </div>
       <div class="card gen">
         <span class="tag gen">生成</span>
-        <video controls preload="metadata" src="../output/video/manzai_cloud_stage_bow_480p.mp4"></video>
+        <video controls preload="metadata" src="media/gen_cloud_stage.mp4"></video>
         <p class="cap"><b>M-1風ステージ</b> — 舞台感・冒頭/締めの拍手・会釈</p>
       </div>
     </div>
   </section>
 </main>
 <footer>
-  manzai-studio · 研究用比較ページ（非公開）。GroundTruth は私的検証の範囲。生成物は台本・音声・参照画像すべてオリジナル/合成。
+  manzai-studio · GroundTruth ↔ 生成物 比較。生成物は台本・音声・参照画像すべてオリジナル/合成。
   <br>リポジトリ: <a href="https://github.com/yutoAb/manzai-studio">github.com/yutoAb/manzai-studio</a>
 </footer>
 </body>
