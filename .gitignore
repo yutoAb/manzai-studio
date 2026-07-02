@@ -30,3 +30,6 @@ research_flowmatching_manzai.md
 scripts/diarize_*.py
 research_bodymotion_manzai.md
 research_roadmap_manzai.md
+
+# 進行中の非公開コント実験(LongCat+Wanハイブリッド)。公開可能になるまでローカル保持
+assets/scripts/konto_*.json
